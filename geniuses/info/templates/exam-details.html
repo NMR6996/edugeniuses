@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Əsas səhifə {% endblock %}
+
+{% block content %}
+
+  <section class="meetings-page" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="meeting-single-item">
+                <div class="thumb">
+                  <div class="price">
+                    <span>{{ exam.exam_fee }} manat</span>
+                  </div>
+                  <div class="date">
+                    <h6>{{ exam.exam_date }}</h6>
+                  </div>
+                  <a><img src="{{ exam.exam_img.url }}" alt=""></a>
+                </div>
+                <div class="down-content">
+                  <h4>{{ exam.exam_title }}</h4>
+                  <p class="description">{{ exam.exam_description|safe }}</p>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div style="margin-bottom: 10px;" class="hours">
+                        <h5 style="margin-bottom: 5px;">Tarix</h5>
+                        <p>{{ exam.exam_date }}</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div style="margin-bottom: 10px;" class="location">
+                        <h5 style="margin-bottom: 5px;">Ünvan</h5>
+                        <p>{{ exam.exam_address }}</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div style="margin-bottom: 10px;" class="share">
+                        <h5 style="margin-bottom: 5px;">Paylaş:</h5>
+                        <ul>
+                          <li><a href="#">Facebook</a>,</li>
+                          <li><a href="#">İnstagram</a>,</li>
+                          <li><a href="#">Linkedin</a>,</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                        {{ subject.subject|safe }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="main-button-red">
+                <a href="{% url 'exams' %}">Bütün sınaqlar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

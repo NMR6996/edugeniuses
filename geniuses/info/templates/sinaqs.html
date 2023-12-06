@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Sınaq nəticəni öyrən {% endblock %}
+
+{% block content %}
+    
+    <section class="contact-us" id="contact">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 align-self-center">
+              <div class="row">
+                <div class="col-lg-12" style="margin-bottom: 10px;">
+                  <form id="contact" action="{% url 'sinaqcavab' %}" method="get">
+                  {% csrf_token %}
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <h2>Sınaq nəticəni öyrən</h2>
+                      </div>
+                      <div class="col-lg-4">
+                        <fieldset>
+                            <select class="form-control" name="id" required>
+                                <option value="">Sınaq seç!</option>
+                                {% for sinaq in sinaqs %}+
+                                    <option value="{{ sinaq.id }}">{{ sinaq.sinaq_tarix }} - {{ sinaq.sinaq_nov }}</option>
+                                {% endfor %}
+                            </select>
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-4">
+                        <fieldset>
+                            <input name="is_no" type="text" placeholder="İş nömrəsi" required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-4">
+                        <fieldset>
+                          <button type="submit" id="form-submit" class="button">Göstər</button>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              {% if user.is_authenticated %}
+                  <div class="col-lg-6">
+                    <form id="contact" action="{% url 'adminsinaqcavab' %}" method="get">
+                      {% csrf_token %}
+                        <div class="row">
+                          <div class="col-lg-8">
+                            <fieldset>
+                                <select class="form-control" name="id" required>
+                                    <option value="">Sınaq seç!</option>
+                                    {% for sinaq in sinaqs %}
+                                        <option value="{{ sinaq.id }}">{{ sinaq.sinaq_tarix }} - {{ sinaq.sinaq_nov }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="hidden" name="sinaqtipi" value="Siyahi" readonly>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-4">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="button">Bütün nəticələrə (siyahı şəklində) bax</button>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </form>
+                  </div>
+                  <div class="col-lg-6">
+                    <form id="contact" action="{% url 'adminsinaqcavab' %}" method="get">
+                      {% csrf_token %}
+                        <div class="row">
+                          <div class="col-lg-8">
+                            <fieldset>
+                                <select class="form-control" name="id" required>
+                                <option value="">Sınaq seç!</option>
+                                    {% for sinaq in sinaqs %}
+                                        <option value="{{ sinaq.id }}">{{ sinaq.sinaq_tarix }} - {{ sinaq.sinaq_nov }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="hidden" name="sinaqtipi" value="Karne" readonly>
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-4">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="button">Bütün cavab kağızlarına (karne şəklində) bax</button>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </form>
+                  </div>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+{% endblock %}

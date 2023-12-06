@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Sınaqlar {% endblock %}
+
+{% block content %}
+
+    <section class="meetings-page" id="meetings">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+{#            <div class="col-lg-12">#}
+{#              <div class="filters">#}
+{#                <ul>#}
+{#                  <li data-filter="*"  class="active">All Meetings</li>#}
+{#                  <li data-filter=".soon">Soon</li>#}
+{#                  <li data-filter=".imp">Important</li>#}
+{#                  <li data-filter=".att">Attractive</li>#}
+{#                </ul>#}
+{#              </div>#}
+{#            </div>#}
+            <div class="col-lg-12">
+              <div class="row grid">
+                  {% for exam in exams %}
+                    <div class="col-lg-4 templatemo-item-col all soon">
+                      <div class="meeting-item">
+                        <div class="thumb">
+                          <div class="price">
+                            <span>{{ exam.exam_fee }} manat</span>
+                          </div>
+                          <a href="{% url 'exams-details' exam.id %}"><img src="{{ exam.exam_img.url }}" ></a>
+                        </div>
+                        <div class="down-content">
+                          <div class="date">
+                            <h6>{{ exam.exam_date }} <span></span></h6>
+                          </div>
+                          <a href="{% url 'exams-details' exam.id %}"><h4>{{ exam.exam_title }}</h4></a>
+                          <p>{{ exam.exam_description|safe }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="pagination">
+                <ul>
+                    {% if exams.has_previous %}
+                        <li><a href="?page={{exams.previous_page_number}}">Əvvəlki</a></li>
+                    {% endif %}
+                    <li><a href="?page=1">1</a></li>
+                    {% if exams.has_next %}
+                        <li><a href="?page={{exams.next_page_number}}">Sonrakı</a></li>
+                    {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}
